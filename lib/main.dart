@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magicblinds/pages/detail_page.dart';
+import 'package:magicblinds/pages/home_page.dart';
 import 'package:magicblinds/pages/navpages/main_page.dart';
 import 'package:magicblinds/pages/welcome_page.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
     ),
-    home: MainPage()
+    home: DetailPage()
     );
   }
 }
