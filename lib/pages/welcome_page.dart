@@ -36,8 +36,8 @@ class _WelcomePageState extends State<WelcomePage> {
                       children: [
                         AppLargeText(text: "Magic", color: Colors.white,),
                         AppText(text: "Blinds", size: 30, color: Colors.white70),
-                        SizedBox(height: 20,),
-                        Container(
+                        const SizedBox(height: 20,),
+                        SizedBox(
                           width: 250,
                           child: AppText(
                             text: "Persianas sofisticadas, control sin esfuerzo",
@@ -45,8 +45,8 @@ class _WelcomePageState extends State<WelcomePage> {
                             size: 14,
                           ),
                         ),
-                        SizedBox(height: 40,),
-                        ResponsiveButton(width: 120,)
+                        const SizedBox(height: 40,),
+                        ResponsiveButton(width: 120,routeName: '/HomePage',)
                       ],
                     ),
                     Column(

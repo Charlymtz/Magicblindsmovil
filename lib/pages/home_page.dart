@@ -1,6 +1,4 @@
-import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:magicblinds/widgets/app_large_text.dart';
 import 'package:magicblinds/widgets/app_text.dart';
@@ -18,9 +16,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     "price.png":"Price",
     "question.png":"Questions"
   };
+
+var imageList = [
+  "img/persianas.png",
+  "img/persianas2.png",
+  "img/persianas3.png",
+  ];
+
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 3, vsync: this);
+    TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +35,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: const EdgeInsets.only(top: 70, left: 20),
             child: Row(
               children: [
-                Icon(Icons.menu, size: 30, color: Colors.black),
+                const Icon(Icons.menu, size: 30, color: Colors.black),
                 Expanded(child: Container()),
                 Container(
                   margin: const EdgeInsets.only(right: 20),
@@ -44,15 +49,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           //discover text
           Container(
             margin: const EdgeInsets.only(left: 20),
-            child: AppLargeText(text: "Discover"),
+            child: AppLargeText(text: "Confort and tec"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           //tabbar
@@ -61,14 +66,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               alignment: Alignment.centerLeft,
               child: TabBar(
                 labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                controller: _tabController,
+                controller: tabController,
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
                 indicator: CircleTabIndicator(color: Colors.purple, radius: 4),
-                tabs: [
-                  Tab(text: "places"),
+                tabs: const [
+                  Tab(text: "Products"),
                   Tab(text: "Inspiration"),
                   Tab(text: "Emotions"),
                 ],
@@ -80,31 +85,33 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             height: 300,
             width: double.maxFinite,
             child: TabBarView(
-              controller: _tabController,
+              controller: tabController,
               children: [
-                ListView.builder(
-                  itemCount: 3,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      margin: const EdgeInsets.only(right: 15, top: 10),
-                      width: 200,
-                      height: 300,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: AssetImage("img/persianas.png"),
-                              fit: BoxFit.cover)),
-                    );
-                  },
-                ),
-                Text("There"),
-                Text("Bye"),
+            ListView.builder(
+            itemCount: imageList.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 15, top: 10),
+                  width: 200,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage(imageList[index]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            ),
+                const Text("There"),
+                const Text("Bye"),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
@@ -123,7 +130,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
@@ -147,10 +154,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
                               image: DecorationImage(
-                                  image: AssetImage("img/"+image.keys.elementAt(index)),
+                                  image: AssetImage("img/${image.keys.elementAt(index)}"),
                                   fit: BoxFit.cover)),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Container(
                           child: AppText(
                             text: image.values.elementAt(index),
@@ -186,12 +193,12 @@ class _CirclePainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias = true;
+    Paint paint = Paint();
+    paint.color = color;
+    paint.isAntiAlias = true;
     final Offset circleOfsset = Offset(
         configuration.size!.width / 2 - radius / 2,
         configuration.size!.height - radius);
-    canvas.drawCircle(offset + circleOfsset, radius, _paint);
+    canvas.drawCircle(offset + circleOfsset, radius, paint);
   }
 }
