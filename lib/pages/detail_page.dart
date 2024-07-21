@@ -5,7 +5,20 @@ import 'package:magicblinds/widgets/app_text.dart';
 import 'package:magicblinds/widgets/responsive_button.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final String imagePath;
+  final String title;
+  final String location;
+  final String price;
+  final String description;
+
+  const DetailPage({
+    required this.imagePath,
+    required this.title,
+    required this.location,
+    required this.price,
+    required this.description,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -29,9 +42,9 @@ class _DetailPageState extends State<DetailPage> {
               child: Container(
                 width: double.maxFinite,
                 height: 350,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("img/persianas.png"),
+                    image: AssetImage(widget.imagePath),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,8 +56,13 @@ class _DetailPageState extends State<DetailPage> {
               child: Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.menu,color: Colors.black45,),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black45,
+                    ),
                   ),
                 ],
               ),
@@ -69,11 +87,11 @@ class _DetailPageState extends State<DetailPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppLargeText(
-                          text: "Yosemite",
+                          text: widget.title,
                           color: Colors.black.withOpacity(0.8),
                         ),
                         AppLargeText(
-                          text: "\$ 250",
+                          text: widget.price,
                           color: Colors.deepPurple,
                         ),
                       ],
@@ -84,7 +102,7 @@ class _DetailPageState extends State<DetailPage> {
                         const Icon(Icons.location_on, color: Colors.deepPurple),
                         const SizedBox(width: 5),
                         AppText(
-                          text: "USA, California",
+                          text: widget.location,
                           color: Colors.grey,
                         ),
                       ],
@@ -156,7 +174,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     const SizedBox(height: 10),
                     AppText(
-                      text: "lorem ipsum",
+                      text: widget.description,
                       color: Colors.grey,
                     ),
                     const SizedBox(height: 20),
