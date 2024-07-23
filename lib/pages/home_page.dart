@@ -4,7 +4,6 @@ import 'package:magicblinds/widgets/app_text.dart';
 import 'detail_page.dart';
 import 'navpages/my_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,13 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  var image = {
-    "blinds.png": "Blinds",
-    "price.png": "Price",
-    "question.png": "Questions"
-  };
-
-  var imageDetails = [
+  final List<Map<String, String>> imageDetails = [
     {
       "imagePath": "img/persianas.png",
       "title": "Bamboo Blinds",
@@ -46,9 +39,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     },
   ];
 
+  final Map<String, String> exploreImages = {
+    "blind.png": "Blinds",
+    "prices.png": "Price",
+    "questions.png": "Questions"
+  };
+
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
               child: Row(
                 children: [
-                  const Icon(Icons.menu, size: 30, color: Colors.black),
+                  const Icon(Icons.menu, size: 30, color: Colors.black87),
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
@@ -73,8 +73,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.blue.withOpacity(0.5),
-                        image: DecorationImage(
+                        color: Colors.blue.withOpacity(0.4),
+                        image: const DecorationImage(
                           image: AssetImage('img/profpic.png'),
                           fit: BoxFit.cover,
                         ),
@@ -86,9 +86,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 30),
             // Discover text
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: AppLargeText(text: "Confort and Tec"),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: AppLargeText(text: "Comfort and Tech", color: Colors.black87),
             ),
             const SizedBox(height: 20),
             // TabBar
@@ -97,15 +97,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: TabBar(
                 labelPadding: const EdgeInsets.symmetric(horizontal: 20),
                 controller: tabController,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
+                labelColor: Colors.black87,
+                unselectedLabelColor: Colors.grey[700],
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
-                indicator: CircleTabIndicator(color: Colors.lightBlue, radius: 4),
+                indicator: CircleTabIndicator(color: Colors.lightBlueAccent, radius: 6),
                 tabs: const [
                   Tab(text: "Products"),
                   Tab(text: "Inspiration"),
-                  Tab(text: "About us"),
+                  Tab(text: "About Us"),
                 ],
               ),
             ),
@@ -135,17 +135,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           );
                         },
                         child: Container(
-                          margin: const EdgeInsets.only(right: 20, top: 20, bottom: 20),
+                          margin: const EdgeInsets.only(right: 20, top: 20, bottom: 20, left: 10),
                           width: 250,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: Offset(0, 3),
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
                               ),
                             ],
                             image: DecorationImage(
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   width: 250,
                                   decoration: BoxDecoration(
                                     color: Colors.white.withOpacity(0.8),
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20),
                                     ),
@@ -172,26 +172,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     children: [
                                       Text(
                                         imageDetails[index]["title"]!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
-                                          color: Colors.black,
+                                          color: Colors.black87,
                                         ),
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
                                         imageDetails[index]["material"]!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
-                                          color: Colors.grey,
+                                          color: Colors.black54,
                                         ),
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
                                         imageDetails[index]["price"]!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
-                                          color: Colors.black,
+                                          color: Colors.black87,
                                         ),
                                       ),
                                     ],
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: LinearGradient(
-                          colors: [Colors.lightBlue[50]!, Colors.lightBlue[100]!],
+                          colors: [Colors.blue[50]!, Colors.blue[100]!],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             color: Colors.black.withOpacity(0.1),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black.withOpacity(0.8),
+                              color: Colors.black87,
                               height: 1.5,
                             ),
                           ),
@@ -250,7 +250,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  // About us tab
+                  // About Us tab
                   SingleChildScrollView(
                     child: Container(
                       margin: const EdgeInsets.all(20.0),
@@ -258,7 +258,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: LinearGradient(
-                          colors: [Colors.lightBlue[50]!, Colors.lightBlue[100]!],
+                          colors: [Colors.blue[50]!, Colors.blue[100]!],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -267,32 +267,33 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             color: Colors.black.withOpacity(0.1),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
                       child: Column(
                         children: [
-                          CircleAvatar(
+                          const CircleAvatar(
                             radius: 50,
                             backgroundImage: AssetImage('img/team.png'),
                           ),
                           const SizedBox(height: 20),
-                          Text(
+                          const Text(
                             'About Us',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.black87,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'We are a team of passionate innovators dedicated to making your home smarter and more comfortable. Our automated blinds project is driven by the desire to blend convenience with cutting-edge technology, offering you seamless control and optimal comfort in your living space.',
+                            'We are a team of passionate innovators dedicated to making your home smarter and more comfortable. Our automated blinds project is driven by the desire to blend convenience with cutting-edge technology, providing a seamless and intuitive experience for you to control and monitor your home environment.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black87,
+                              height: 1.5,
                             ),
                           ),
                         ],
@@ -309,13 +310,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppLargeText(
-                    text: "Explore more",
+                  const AppLargeText(
+                    text: "Explore More",
                     size: 22,
+                    color: Colors.black87,
                   ),
-                  AppText(
-                    text: "see all",
-                    color: Colors.grey, textAlign: TextAlign.center,
+                  GestureDetector(
+                    onTap: () {
+                      // Acción al hacer clic en "see all"
+                    },
+                    child: const AppText(
+                      text: "See All",
+                      color: Colors.lightBlueAccent,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
@@ -326,7 +334,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               height: 160,
               margin: const EdgeInsets.only(left: 20),
               child: ListView.builder(
-                itemCount: image.length,
+                itemCount: exploreImages.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, index) {
                   return Container(
@@ -338,18 +346,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           width: 120,
                           height: 120,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(15),
                             color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 4,
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                             image: DecorationImage(
-                              image: AssetImage("img/${image.keys.elementAt(index)}"),
+                              image: AssetImage("img/${exploreImages.keys.elementAt(index)}"),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         const SizedBox(height: 10),
                         AppText(
-                          text: image.values.elementAt(index),
-                          color: Colors.lightBlue, textAlign: TextAlign.center,
+                          text: exploreImages.values.elementAt(index),
+                          color: Colors.black87,
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
@@ -367,8 +384,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
 class CircleTabIndicator extends Decoration {
   final Color color;
-  double radius;
-  CircleTabIndicator({required this.color, required this.radius});
+  final double radius;
+
+  CircleTabIndicator({required this.color, this.radius = 6.0});
+
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _CirclePainter(color: color, radius: radius);
@@ -377,17 +396,18 @@ class CircleTabIndicator extends Decoration {
 
 class _CirclePainter extends BoxPainter {
   final Color color;
-  double radius;
-  _CirclePainter({required this.color, required this.radius});
+  final double radius;
+
+  _CirclePainter({required this.color, this.radius = 6.0});
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint paint = Paint();
-    paint.color = color;
-    paint.isAntiAlias = true;
-    final Offset circleOfsset = Offset(
-        configuration.size!.width / 2 - radius / 2,
+    final Paint paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    final Offset circleOffset = offset + Offset(
+        configuration.size!.width / 2,
         configuration.size!.height - radius);
-    canvas.drawCircle(offset + circleOfsset, radius, paint);
+    canvas.drawCircle(circleOffset, radius, paint);
   }
 }
