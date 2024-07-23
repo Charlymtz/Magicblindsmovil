@@ -30,7 +30,7 @@ class ResponsiveButton extends StatelessWidget {
               isResponsive == true
                   ? Container(
                 margin: const EdgeInsets.only(left: 20),
-                child: AppText(text: "Buy Item Now", color: Colors.black),
+                child: AppText(text: "Buy Item Now", color: Colors.black, textAlign: TextAlign.center,),
               )
                   : Container(),
               Image.asset("img/boton.png"),

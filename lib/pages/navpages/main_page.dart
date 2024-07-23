@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magicblinds/pages/navpages/bar_item_page.dart';
 import 'package:magicblinds/pages/home_page.dart';
+import 'package:magicblinds/pages/navpages/bar_item_page.dart';
 import 'package:magicblinds/pages/navpages/my_page.dart';
 import 'package:magicblinds/pages/navpages/search_page.dart';
 
@@ -18,12 +18,14 @@ class _MainPageState extends State<MainPage> {
     const SearchPage(),
     const MyPage()
   ];
-  int currentIndex=0;
-  void onTap(int index){
+  int currentIndex = 0;
+
+  void onTap(int index) {
     setState(() {
       currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +34,20 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: BottomNavigationBar(
         unselectedFontSize: 0,
         selectedFontSize: 0,
-        type:BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         onTap: onTap,
         currentIndex: currentIndex,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey.withOpacity(0.5),
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
         elevation: 0,
         items: const [
-          BottomNavigationBarItem(label:("Home"),icon: Icon(Icons.apps)),
-          BottomNavigationBarItem(label:("Bar"),icon: Icon(Icons.bar_chart_sharp)),
-          BottomNavigationBarItem(label:("Search"),icon: Icon(Icons.search)),
-          BottomNavigationBarItem(label:("My page"),icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: ("Home"), icon: Icon(Icons.apps)),
+          BottomNavigationBarItem(label: ("Bar"), icon: Icon(Icons.bar_chart_sharp)),
+          BottomNavigationBarItem(label: ("Search"), icon: Icon(Icons.search)),
+          BottomNavigationBarItem(label: ("My page"), icon: Icon(Icons.person)),
         ],
       ),
     );

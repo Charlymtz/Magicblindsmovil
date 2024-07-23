@@ -25,7 +25,7 @@ class AppButtons extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           color: backgroundColor
       ),
-      child: isIcon==false?Center(child: AppText(text: text!, color: color,)):Center(child: Icon(icon, color:color,)),
+      child: isIcon==false?Center(child: AppText(text: text!, color: color, textAlign: TextAlign.center,)):Center(child: Icon(icon, color:color,)),
     );
   }
 }

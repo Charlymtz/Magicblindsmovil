@@ -35,18 +35,18 @@ class _WelcomePageState extends State<WelcomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppLargeText(text: "Magic", color: Colors.white,),
-                        AppText(text: "Blinds", size: 30, color: Colors.white70),
+                        AppText(text: "Blinds", size: 30, color: Colors.white70, textAlign: TextAlign.center,),
                         const SizedBox(height: 20,),
                         SizedBox(
                           width: 250,
                           child: AppText(
                             text: "Persianas sofisticadas, control sin esfuerzo",
                             color: Colors.white70,
-                            size: 14,
+                            size: 14, textAlign: TextAlign.center,
                           ),
                         ),
                         const SizedBox(height: 40,),
-                        ResponsiveButton(width: 120,routeName: '/HomePage',)
+                        ResponsiveButton(width: 120,routeName: '/MainPage',)
                       ],
                     ),
                     Column(

@@ -8,7 +8,7 @@ class AppText extends StatelessWidget {
   AppText({super.key,
     this.size = 16,
     required this.text,
-    this.color = Colors.black54});
+    this.color = Colors.black54, required TextAlign textAlign});
 
   @override
   Widget build(BuildContext context) {

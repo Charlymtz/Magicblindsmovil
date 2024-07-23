@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicblinds/pages/home_page.dart';
+import 'package:magicblinds/pages/navpages/main_page.dart';
 import 'package:magicblinds/pages/welcome_page.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/":(context) => WelcomePage(),
-        "/HomePage":(context) => HomePage(),
+        "/MainPage":(context) => MainPage(),
 
       },
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:magicblinds/widgets/app_large_text.dart';
 import 'package:magicblinds/widgets/app_text.dart';
 import 'detail_page.dart';
+import 'navpages/my_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,28 +19,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     "question.png": "Questions"
   };
 
-
   var imageDetails = [
     {
       "imagePath": "img/persianas.png",
-      "title": "Blinds",
-      "location": "USA, California",
+      "title": "Bamboo Blinds",
+      "material": "Natural Bamboo",
       "price": "\$250",
-      "description": "This is the description for Blinds."
+      "description":
+      "Add a touch of nature to your home with our Bamboo Blinds. Made from sustainable bamboo, these blinds offer a natural look that brings warmth and tranquility to any room. Perfect for creating a serene and eco-friendly environment."
     },
     {
       "imagePath": "img/persianas2.png",
-      "title": "Blinds 2",
-      "location": "USA, Nevada",
+      "title": "Velvet Drapes",
+      "material": "Plush Velvet",
       "price": "\$300",
-      "description": "This is the description for Blinds 2."
+      "description":
+      "Elevate your space with our luxurious Velvet Drapes. Crafted from plush velvet fabric, these drapes add a sophisticated touch to your decor. Their rich texture and elegant appearance create an inviting and opulent atmosphere in any room."
     },
     {
       "imagePath": "img/persianas3.png",
-      "title": "Blinds 3",
-      "location": "USA, Texas",
+      "title": "Cocoa Blinds",
+      "material": "Rich Cocoa Fabric",
       "price": "\$350",
-      "description": "This is the description for Blinds 3."
+      "description":
+      "Introducing our Cocoa Blinds, designed to blend style and functionality. Featuring a deep, warm hue reminiscent of rich cocoa, these blinds provide excellent light control while enhancing your interior with a cozy and refined aesthetic."
     },
   ];
 
@@ -46,167 +50,316 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //menu text
-          Container(
-            padding: const EdgeInsets.only(top: 70, left: 20),
-            child: Row(
-              children: [
-                const Icon(Icons.menu, size: 30, color: Colors.black),
-                Expanded(child: Container()),
-                Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.withOpacity(0.5),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Menu bar
+            Padding(
+              padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
+              child: Row(
+                children: [
+                  const Icon(Icons.menu, size: 30, color: Colors.black),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const MyPage()),
+                      );
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue.withOpacity(0.5),
+                        image: DecorationImage(
+                          image: AssetImage('img/profpic.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          //discover text
-          Container(
-            margin: const EdgeInsets.only(left: 20),
-            child: AppLargeText(text: "Confort and tec"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          //tabbar
-          Container(
-            child: Align(
+            const SizedBox(height: 30),
+            // Discover text
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: AppLargeText(text: "Confort and Tec"),
+            ),
+            const SizedBox(height: 20),
+            // TabBar
+            Align(
               alignment: Alignment.centerLeft,
               child: TabBar(
-                labelPadding: const EdgeInsets.only(left: 20, right: 20),
+                labelPadding: const EdgeInsets.symmetric(horizontal: 20),
                 controller: tabController,
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
-                indicator: CircleTabIndicator(color: Colors.purple, radius: 4),
+                indicator: CircleTabIndicator(color: Colors.lightBlue, radius: 4),
                 tabs: const [
                   Tab(text: "Products"),
                   Tab(text: "Inspiration"),
-                  Tab(text: "Emotions"),
+                  Tab(text: "About us"),
                 ],
               ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 20),
-            height: 300,
-            width: double.maxFinite,
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                ListView.builder(
-                  itemCount: imageDetails.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPage(
-                              imagePath: imageDetails[index]["imagePath"]!,
-                              title: imageDetails[index]["title"]!,
-                              location: imageDetails[index]["location"]!,
-                              price: imageDetails[index]["price"]!,
-                              description: imageDetails[index]["description"]!,
+            SizedBox(
+              height: 400,
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  // Products tab
+                  ListView.builder(
+                    itemCount: imageDetails.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                imagePath: imageDetails[index]["imagePath"]!,
+                                title: imageDetails[index]["title"]!,
+                                material: imageDetails[index]["material"]!,
+                                price: imageDetails[index]["price"]!,
+                                description: imageDetails[index]["description"]!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 20, top: 20, bottom: 20),
+                          width: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            image: DecorationImage(
+                              image: AssetImage(imageDetails[index]["imagePath"]!),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 15, top: 10),
-                        width: 200,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          image: DecorationImage(
-                            image: AssetImage(imageDetails[index]["imagePath"]!),
-                            fit: BoxFit.cover,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                bottom: 0,
+                                child: Container(
+                                  width: 250,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.8),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        imageDetails[index]["title"]!,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        imageDetails[index]["material"]!,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        imageDetails[index]["price"]!,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+                      );
+                    },
+                  ),
+                  // Inspiration tab
+                  SingleChildScrollView(
+                    child: Container(
+                      margin: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          colors: [Colors.lightBlue[50]!, Colors.lightBlue[100]!],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
-                const Text("There"),
-                const Text("Bye"),
-              ],
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'img/persianas4.png',
+                              width: 300,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            "Our mission is to create smarter, more comfortable living spaces. Our automated blinds blend convenience with technology, adjusting to ambient temperature for optimal comfort. This project embodies our commitment to innovation, allowing you to effortlessly monitor and control your blinds from your phone for a new level of home automation.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black.withOpacity(0.8),
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // About us tab
+                  SingleChildScrollView(
+                    child: Container(
+                      margin: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          colors: [Colors.lightBlue[50]!, Colors.lightBlue[100]!],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage('img/team.png'),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            'About Us',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'We are a team of passionate innovators dedicated to making your home smarter and more comfortable. Our automated blinds project is driven by the desire to blend convenience with cutting-edge technology, offering you seamless control and optimal comfort in your living space.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppLargeText(
-                  text: "Explore more",
-                  size: 22,
-                ),
-                AppText(
-                  text: "see all",
-                  color: Colors.grey,
-                )
-              ],
+            const SizedBox(height: 20),
+            // Explore more section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppLargeText(
+                    text: "Explore more",
+                    size: 22,
+                  ),
+                  AppText(
+                    text: "see all",
+                    color: Colors.grey, textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            height: 120,
-            width: double.maxFinite,
-            margin: const EdgeInsets.only(left: 20),
-            child: ListView.builder(
-                itemCount: 3,
+            const SizedBox(height: 10),
+            // Explore more images
+            Container(
+              height: 160,
+              margin: const EdgeInsets.only(left: 20),
+              child: ListView.builder(
+                itemCount: image.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, index) {
                   return Container(
-                    margin: const EdgeInsets.only(right: 30),
+                    margin: const EdgeInsets.only(right: 20),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(right: 50),
-                          width: 80,
-                          height: 80,
+                          width: 120,
+                          height: 120,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "img/${image.keys.elementAt(index)}"),
-                                  fit: BoxFit.cover)),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          child: AppText(
-                            text: image.values.elementAt(index),
-                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage("img/${image.keys.elementAt(index)}"),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 10),
+                        AppText(
+                          text: image.values.elementAt(index),
+                          color: Colors.lightBlue, textAlign: TextAlign.center,
+                        ),
                       ],
                     ),
                   );
-                }),
-          )
-        ],
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
