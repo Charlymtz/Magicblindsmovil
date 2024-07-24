@@ -15,12 +15,14 @@ class _BarItemPageState extends State<BarItemPage> {
   void initState() {
     super.initState();
 
-    // Simular datos
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      _dataController.add({
-        'temperature': 20.0 + (10.0 * (timer.tick % 10) / 10),
-        'humidity': 50.0 + (10.0 * (timer.tick % 10) / 10),
-      });
+    // Simular datos usando Stream.periodic
+    Stream.periodic(const Duration(seconds: 1), (count) {
+      return {
+        'temperature': 20.0 + (10.0 * (count % 10) / 10),
+        'humidity': 50.0 + (10.0 * (count % 10) / 10),
+      };
+    }).listen((data) {
+      _dataController.add(data);
     });
   }
 
@@ -126,57 +128,52 @@ class _BarItemPageState extends State<BarItemPage> {
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      spreadRadius: 6,
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 6,
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
                 ),
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Padding added for better spacing
-                    Text(
-                      title,
-                      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueAccent),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    Icon(
-                      title == 'Temperature' ? Icons.thermostat_outlined : Icons.opacity,
-                      size: 120,
-                      color: Colors.blueAccent,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      value,
-                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.black87),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Close', style: TextStyle(color: Colors.blueAccent, fontSize: 18)),
-                      ),
-                    ),
-                  ],
+              ],
+            ),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                Icon(
+                  title == 'Temperature' ? Icons.thermostat_outlined : Icons.opacity,
+                  size: 120,
+                  color: Colors.blueAccent,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  value,
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.black87),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Close', style: TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
