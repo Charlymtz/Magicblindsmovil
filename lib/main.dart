@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:magicblinds/pages/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:magicblinds/firebase_options.dart';
 import 'package:magicblinds/pages/navpages/main_page.dart';
 import 'package:magicblinds/pages/welcome_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,9 +25,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/":(context) => WelcomePage(),
-        "/MainPage":(context) => MainPage(),
-
+        "/": (context) => WelcomePage(),
+        "/MainPage": (context) => MainPage(),
       },
     );
   }

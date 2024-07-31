@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magicblinds/pages/navpages/bar_item_page.dart';
+import 'package:magicblinds/pages/navpages/stats.dart';
 import 'package:magicblinds/pages/home_page.dart';
 import 'package:magicblinds/pages/navpages/my_page.dart';
 import 'package:magicblinds/pages/navpages/search_page.dart';
@@ -14,7 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     const HomePage(),
-    BarItemPage(),
+    const Stats(),
     const SearchPage(),
     const MyPage()
   ];
